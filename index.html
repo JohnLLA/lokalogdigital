@@ -97,6 +97,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
   transition:background .18s,color .18s;
 }
 .cta:hover,.cta:focus-visible{background:var(--ink);color:var(--gold);animation:none;box-shadow:none}
+.cta.cta--off{background:#DCDAD3;color:#6E747F;animation:none !important;box-shadow:none !important;cursor:default}
+.cta.cta--off:hover,.cta.cta--off:focus-visible{background:#DCDAD3;color:#6E747F}
+.btn.btn--off{background:#DCDAD3;color:#6E747F;cursor:default}
+.btn.btn--off:hover,.btn.btn--off:focus-visible{background:#DCDAD3;color:#6E747F}
+.prices--closed{position:relative}
+.prices--closed .price{filter:grayscale(1);opacity:.45}
+.prices--closed::before{content:"";position:absolute;inset:-.6rem;z-index:2;background:rgba(224,222,215,.6)}
+.prices--closed::after{
+  content:"Påmeldingen er stengt";
+  position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--navy);color:#fff;padding:.7rem 1.6rem;border-radius:999px;
+  font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:.08em;
+  text-transform:uppercase;white-space:nowrap;text-align:center;
+}
+@media(max-width:420px){.prices--closed::after{font-size:1rem;padding:.6rem 1.1rem}}
 @keyframes blink{
   0%,100%{box-shadow:0 0 0 0 rgba(242,166,59,.6);filter:none}
   45%    {box-shadow:0 0 0 9px rgba(242,166,59,0);filter:brightness(1.12)}
@@ -460,9 +475,7 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
          Lenker til påmeldingsskjemaet i Google Forms.
          Skal adressen endres, er det bare href nedenfor som må byttes.
          ============================================================ -->
-    <a class="cta"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSdbS4LFKytN1RwTs4_FBNLrALPOU1FsQLqLF7-PFNhhm8LjVw/viewform"
-       target="_blank" rel="noopener">Meld deg på her</a>
+    <span class="cta cta--off" aria-disabled="true">Påmeldingen er stengt</span>
   </div>
 </header>
 
@@ -798,10 +811,10 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
     <div class="shead rv">
       <p class="shead__k">Priser</p>
       <h2>Hva koster det?</h2>
-      <p>Du kan bli med på hele døgnet, eller bare den delen som passer deg.</p>
+      <p>Slik var prisene for å delta – på hele døgnet, eller bare den delen som passet.</p>
     </div>
 
-    <div class="prices rv">
+    <div class="prices prices--closed rv">
 
       <div class="price price--main">
         <p class="price__tag">Hele døgnet</p>
@@ -840,10 +853,8 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
     </div>
 
     <div class="prices__foot rv">
-      <a class="btn"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSdbS4LFKytN1RwTs4_FBNLrALPOU1FsQLqLF7-PFNhhm8LjVw/viewform"
-         target="_blank" rel="noopener">Meld deg på</a>
-      <p>Prisene er per deltaker og oppgitt uten mva.</p>
+      <span class="btn btn--off" aria-disabled="true">Påmeldingen er stengt</span>
+      <p>Konferansen ble holdt 5.–6. november 2026. Prisene var per deltaker og oppgitt uten mva.</p>
     </div>
   </div>
 </section>
