@@ -345,6 +345,11 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
   transition:background .18s,color .18s;white-space:nowrap;
 }
 .btn:hover,.btn:focus-visible{background:var(--gold);color:var(--ink)}
+.btn--sm{font-size:1.02rem;padding:.48rem 1.15rem;letter-spacing:.05em}
+.btn--ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn--ghost:hover,.btn--ghost:focus-visible{background:var(--navy);color:#fff}
+.dl{margin:.95rem 0 0}
+.dayback{margin:2rem 0 0;display:flex;justify-content:center}
 
 /* ============ BIDRAGSYTERE ============ */
 .people{background:var(--ink);color:#fff}
@@ -535,16 +540,15 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
     <div class="shead rv">
       <p class="shead__k">Program</p>
       <h2>Slik ser døgnet ut</h2>
-      <p>Programmet er under arbeid. Postene som står som «kommer», blir annonsert her etter hvert som de er på plass.</p>
     </div>
 
     <div class="tabs rv" role="tablist" aria-label="Velg dag">
-      <button class="tab" id="tab-tor" role="tab" aria-selected="true" aria-controls="dag-tor">Torsdag 5. november</button>
-      <button class="tab" id="tab-fre" role="tab" aria-selected="false" aria-controls="dag-fre">Fredag 6. november</button>
+      <button class="tab" id="tab-fre" role="tab" aria-selected="true" aria-controls="dag-fre">Fredag 6. november</button>
+      <button class="tab" id="tab-tor" role="tab" aria-selected="false" aria-controls="dag-tor">Torsdag 5. november</button>
     </div>
 
     <!-- ---------- TORSDAG ---------- -->
-    <div class="day" id="dag-tor" role="tabpanel" aria-labelledby="tab-tor">
+    <div class="day" id="dag-tor" role="tabpanel" aria-labelledby="tab-tor" hidden>
 
       <div class="slot rv">
         <div class="slot__time"><span class="t">18.00</span><span class="d">1 t 30 min</span></div>
@@ -586,7 +590,7 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
     </div>
 
     <!-- ---------- FREDAG ---------- -->
-    <div class="day" id="dag-fre" role="tabpanel" aria-labelledby="tab-fre" hidden>
+    <div class="day" id="dag-fre" role="tabpanel" aria-labelledby="tab-fre">
 
       <div class="slot rv">
         <div class="slot__time"><span class="t">09.00</span><span class="d">30 min</span></div>
@@ -600,6 +604,7 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
             verktøy og widgets – flere av dem laget av journalister uten kodebakgrunn.
             Praktisk og nært, og allerede godt mottatt på NAMS 2026.
           </p>
+          <p class="dl"><a class="btn btn--sm" href="kaja.pdf" download>Last ned presentasjonen</a></p>
         </div>
       </div>
 
@@ -777,6 +782,10 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
       <div class="slot slot--break rv">
         <div class="slot__time"><span class="t">14.30</span></div>
         <div class="slot__body"><h3>Programmet er slutt</h3></div>
+      </div>
+
+      <div class="dayback rv">
+        <button class="btn btn--ghost" type="button" data-goto="tab-tor">← Torsdagsprogrammet</button>
       </div>
 
     </div>
@@ -1016,6 +1025,15 @@ section{padding:clamp(3.2rem,7vw,5.6rem) 0}
     });
     reveal();
   }
+  Array.prototype.slice.call(document.querySelectorAll('[data-goto]')).forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = document.getElementById(b.getAttribute('data-goto'));
+      if(!t) return;
+      select(t); t.focus();
+      var p = document.getElementById('program');
+      if(p) p.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
   tabs.forEach(function(t){
     t.addEventListener('click', function(){ select(t); });
     t.addEventListener('keydown', function(e){
